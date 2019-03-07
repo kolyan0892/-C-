@@ -1,0 +1,7 @@
+C:\Users\User\source\repos\Word\Word\bin\Debug\Word.exe.config
+C:\Users\User\source\repos\Word\Word\bin\Debug\Word.exe
+C:\Users\User\source\repos\Word\Word\bin\Debug\Word.pdb
+C:\Users\User\source\repos\Word\Word\obj\Debug\Word.csprojAssemblyReference.cache
+C:\Users\User\source\repos\Word\Word\obj\Debug\Word.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\Word\Word\obj\Debug\Word.exe
+C:\Users\User\source\repos\Word\Word\obj\Debug\Word.pdb
