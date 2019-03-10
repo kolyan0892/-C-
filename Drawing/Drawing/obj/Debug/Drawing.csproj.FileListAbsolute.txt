@@ -1,0 +1,9 @@
+C:\Users\Солнышко\source\repos\Drawing\Drawing\bin\Debug\Drawing.exe.config
+C:\Users\Солнышко\source\repos\Drawing\Drawing\bin\Debug\Drawing.exe
+C:\Users\Солнышко\source\repos\Drawing\Drawing\bin\Debug\Drawing.pdb
+C:\Users\Солнышко\source\repos\Drawing\Drawing\obj\Debug\Drawing.Form1.resources
+C:\Users\Солнышко\source\repos\Drawing\Drawing\obj\Debug\Drawing.Properties.Resources.resources
+C:\Users\Солнышко\source\repos\Drawing\Drawing\obj\Debug\Drawing.csproj.GenerateResource.cache
+C:\Users\Солнышко\source\repos\Drawing\Drawing\obj\Debug\Drawing.csproj.CoreCompileInputs.cache
+C:\Users\Солнышко\source\repos\Drawing\Drawing\obj\Debug\Drawing.exe
+C:\Users\Солнышко\source\repos\Drawing\Drawing\obj\Debug\Drawing.pdb
