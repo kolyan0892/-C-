@@ -10,38 +10,38 @@ namespace Server
 {
     public class ClientObject
     {
-        public TcpClient client;
+        public TcpClient tcpClient;
 
         public ClientObject(TcpClient tcpClient)
         {
-            client = tcpClient;
+            this.tcpClient = tcpClient;
         }
 
         public void Process()
         {
-            NetworkStream stream = null;
+            NetworkStream networkStream = null;
             try
             {
-                stream = client.GetStream();
+                networkStream = tcpClient.GetStream();
                 byte[] data = new byte[64]; // буфер для получаемых данных
                 while (true)
                 {
                     // получаем сообщение
-                    StringBuilder builder = new StringBuilder();
+                    StringBuilder stringBuilder = new StringBuilder();
                     int bytes = 0;
                     do
                     {
-                        bytes = stream.Read(data, 0, data.Length); // считаываем ответ
-                        builder.Append(Encoding.Unicode.GetString(data, 0, bytes)); // декодируем байты в строку
+                        bytes = networkStream.Read(data, 0, data.Length); // считаываем ответ
+                        stringBuilder.Append(Encoding.Unicode.GetString(data, 0, bytes)); // декодируем байты в строку
                     }
-                    while (stream.DataAvailable); // проверка на наличие данных в потоке
+                    while (networkStream.DataAvailable); // проверка на наличие данных в потоке
 
-                    string message = builder.ToString(); // преобразуем в строку
+                    string message = stringBuilder.ToString(); // преобразуем в строку
 
                     Console.WriteLine(message);
                     message = Service(message, "Центр обновления Windows"); // запускаем/останавливаем службу, возвращаем статус службы
                     data = Encoding.Unicode.GetBytes(message); // кодируем сообщение в байты
-                    stream.Write(data, 0, data.Length); // отправляем сообщение
+                    networkStream.Write(data, 0, data.Length); // отправляем сообщение
                 }
             }
             catch (Exception ex)
@@ -50,10 +50,10 @@ namespace Server
             }
             finally
             {
-                if (stream != null)
-                    stream.Close();
-                if (client != null)
-                    client.Close();
+                if (networkStream != null)
+                    networkStream.Close();
+                if (tcpClient != null)
+                    tcpClient.Close();
             }
         }
 

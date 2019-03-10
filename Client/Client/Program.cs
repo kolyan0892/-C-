@@ -13,11 +13,12 @@ namespace Client
         const string address = "127.0.0.1"; // IP адрес
         static void Main(string[] args)
         {
-            TcpClient client = null;
+            TcpClient tcpClient = null;
+            NetworkStream networkStream = null;
             try
             {
-                client = new TcpClient(address, port);
-                NetworkStream stream = client.GetStream();
+                tcpClient = new TcpClient(address, port);
+                networkStream = tcpClient.GetStream();
 
                 while (true)
                 {
@@ -40,20 +41,20 @@ namespace Client
                     }
                    
                     byte[] data = Encoding.Unicode.GetBytes(message); // преобразуем сообщение в массив байтов                    
-                    stream.Write(data, 0, data.Length); // отправка сообщения
+                    networkStream.Write(data, 0, data.Length); // отправка сообщения
 
                     // получаем ответ
                     data = new byte[64]; // буфер для получаемых данных
-                    StringBuilder builder = new StringBuilder();
+                    StringBuilder stringBuilder = new StringBuilder();
                     int bytes = 0;
                     do
                     {
-                        bytes = stream.Read(data, 0, data.Length); // считываем ответ
-                        builder.Append(Encoding.Unicode.GetString(data, 0, bytes)); // декодируем байты в строку
+                        bytes = networkStream.Read(data, 0, data.Length); // считываем ответ
+                        stringBuilder.Append(Encoding.Unicode.GetString(data, 0, bytes)); // декодируем байты в строку
                     }
-                    while (stream.DataAvailable); // проверка на наличие данных в потоке 
+                    while (networkStream.DataAvailable); // проверка на наличие данных в потоке 
 
-                    message = builder.ToString(); // преобразуем в строку
+                    message = stringBuilder.ToString(); // преобразуем в строку
                     Console.WriteLine("Сервер: {0}", message);
                 }
             }
@@ -65,14 +66,10 @@ namespace Client
             }
             finally
             {
-                try
-                {
-                    client.Close();
-                }
-                catch (NullReferenceException)
-                {
-
-                }               
+                if (networkStream != null)
+                    networkStream.Close();
+                if (tcpClient != null)
+                    tcpClient.Close();
             }
         }
     }
