@@ -60,10 +60,19 @@ namespace Client
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                Console.WriteLine("Нажмите любую клавишу для завершения программы");
+                Console.ReadKey();
             }
             finally
             {
-                client.Close();
+                try
+                {
+                    client.Close();
+                }
+                catch (NullReferenceException)
+                {
+
+                }               
             }
         }
     }
