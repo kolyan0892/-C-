@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Sockets;
+using System.ServiceProcess;
 
 namespace Server
 {
     public class ClientObject
     {
         public TcpClient client;
-        bool statusService = false;
 
         public ClientObject(TcpClient tcpClient)
         {
@@ -39,7 +39,7 @@ namespace Server
                     string message = builder.ToString(); // преобразуем в строку
 
                     Console.WriteLine(message);
-                    message = Service(message); // возвращает статус службы
+                    message = Service(message, "Центр обновления Windows"); // запускаем/останавливаем службу, возвращаем статус службы
                     data = Encoding.Unicode.GetBytes(message); // кодируем сообщение в байты
                     stream.Write(data, 0, data.Length); // отправляем сообщение
                 }
@@ -57,24 +57,47 @@ namespace Server
             }
         }
 
-        private string Service(string message) // для возврата статуса службы
+        private string Service(string message, string serviceName) // для возврата статуса службы
         {
             int cmd = Int32.Parse(message);
-            if(cmd == 1 && !statusService) // если пришла команда включить и служба отключена
-            {
-                statusService = true;
-                return "Запуск службы";             
+
+            if(cmd == 1) // если пришла команда включить и служба отключена
+            {                
+                return StartService(serviceName);             
             }
-            else if (cmd == 1 && statusService) // если пришла команда включить и служба включена
+            else // если пришла команда отключить
             {
-                return "Служба уже в работе";
+                return StopService(serviceName);
             }
-            else if(cmd == 0 && statusService) // если пришла команда отключить и служба включена
+        }
+
+        private string StartService(string serviceName) // запуск службы
+        {
+            ServiceController serviceController = new ServiceController(serviceName);
+
+            if(serviceController.Status != ServiceControllerStatus.Running) // проверяем не запущенна ли служба
             {
-                statusService = false;
-                return "Остановка службы";
+                serviceController.Start(); // запускаем службу
+                serviceController.WaitForStatus(ServiceControllerStatus.Running, TimeSpan.FromMinutes(1)); // в течении минуты ждём статус от службы
+                return "Служба запущена";
             }
-            else // если пришла команда отключить и служба отключена
+            else // если служба уже запущена
+            {
+                return "Служба уже запущена";
+            }
+        }
+
+        private string StopService(string serviceName) // запуск службы
+        {
+            ServiceController serviceController = new ServiceController(serviceName);
+
+            if (serviceController.Status != ServiceControllerStatus.Stopped) // проверяем не остановлена ли служба
+            {
+                serviceController.Stop(); // останавливаем службу
+                serviceController.WaitForStatus(ServiceControllerStatus.Stopped, TimeSpan.FromMinutes(1)); // в течении минуты ждём статус от службы
+                return "Служба остановлена";
+            }
+            else // если служба уже остановлена
             {
                 return "Служба уже остановлена";
             }
