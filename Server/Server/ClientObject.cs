@@ -43,6 +43,7 @@ namespace Server
                         Console.WriteLine("Введите номер службы \n");
                         message += " " + Console.ReadLine();
                     }
+
                     data = Encoding.Unicode.GetBytes(message); // кодируем сообщение в байты
                     networkStream.Write(data, 0, data.Length); // отправляем сообщение
 
