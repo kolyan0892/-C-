@@ -19,7 +19,7 @@ namespace Server
             {
                 listener = new TcpListener(IPAddress.Parse("127.0.0.1"), port);
                 listener.Start(); // старт ожидания
-                Console.WriteLine("Ожидание команды...");
+                Console.WriteLine("Ожидание подключения...");
 
                 while (true)
                 {

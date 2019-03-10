@@ -5,3 +5,10 @@ C:\Users\User\source\repos\Server\Server\obj\Debug\Server.csprojAssemblyReferenc
 C:\Users\User\source\repos\Server\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
 C:\Users\User\source\repos\Server\Server\obj\Debug\Server.exe
 C:\Users\User\source\repos\Server\Server\obj\Debug\Server.pdb
+D:\Tasks\-C-\Server\Server\bin\Debug\Server.exe.config
+D:\Tasks\-C-\Server\Server\bin\Debug\Server.exe
+D:\Tasks\-C-\Server\Server\bin\Debug\Server.pdb
+D:\Tasks\-C-\Server\Server\obj\Debug\Server.csprojAssemblyReference.cache
+D:\Tasks\-C-\Server\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
+D:\Tasks\-C-\Server\Server\obj\Debug\Server.exe
+D:\Tasks\-C-\Server\Server\obj\Debug\Server.pdb

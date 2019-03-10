@@ -11,6 +11,9 @@ namespace Server
     public class ClientObject
     {
         public TcpClient tcpClient;
+        string message;
+        int cmd;
+        bool parse;
 
         public ClientObject(TcpClient tcpClient)
         {
@@ -26,22 +29,35 @@ namespace Server
                 byte[] data = new byte[64]; // буфер для получаемых данных
                 while (true)
                 {
+                    Console.WriteLine("Введите команду: 0 - отключить службу, 1 - включить службу, 2 - получить список служб, 3 - получить статус конкретной службы");
+                    message = Console.ReadLine(); // запускаем/останавливаем службу, возвращаем статус службы
+                    parse = Int32.TryParse(message, out cmd);
+                    
+                    if (cmd < 0 || cmd > 3 || parse == false)
+                    {
+                        Console.WriteLine("Введена неверная команда");
+                        continue;
+                    }
+                    else if (cmd == 0 || cmd == 1 || cmd == 3) // если необходимо указывать номер службы
+                    {
+                        Console.WriteLine("Введите номер службы \n");
+                        message += " " + Console.ReadLine();
+                    }
+                    data = Encoding.Unicode.GetBytes(message); // кодируем сообщение в байты
+                    networkStream.Write(data, 0, data.Length); // отправляем сообщение
+
                     // получаем сообщение
                     StringBuilder stringBuilder = new StringBuilder();
                     int bytes = 0;
                     do
                     {
-                        bytes = networkStream.Read(data, 0, data.Length); // считаываем ответ
+                        bytes = networkStream.Read(data, 0, data.Length); // считываем ответ
                         stringBuilder.Append(Encoding.Unicode.GetString(data, 0, bytes)); // декодируем байты в строку
                     }
                     while (networkStream.DataAvailable); // проверка на наличие данных в потоке
 
-                    string message = stringBuilder.ToString(); // преобразуем в строку
-
+                    message = stringBuilder.ToString(); // преобразуем в строку  
                     Console.WriteLine(message);
-                    message = Service(message, "Центр обновления Windows"); // запускаем/останавливаем службу, возвращаем статус службы
-                    data = Encoding.Unicode.GetBytes(message); // кодируем сообщение в байты
-                    networkStream.Write(data, 0, data.Length); // отправляем сообщение
                 }
             }
             catch (Exception ex)
@@ -54,52 +70,6 @@ namespace Server
                     networkStream.Close();
                 if (tcpClient != null)
                     tcpClient.Close();
-            }
-        }
-
-        private string Service(string message, string serviceName) // для возврата статуса службы
-        {
-            int cmd = Int32.Parse(message);
-
-            if(cmd == 1) // если пришла команда включить и служба отключена
-            {                
-                return StartService(serviceName);             
-            }
-            else // если пришла команда отключить
-            {
-                return StopService(serviceName);
-            }
-        }
-
-        private string StartService(string serviceName) // запуск службы
-        {
-            ServiceController serviceController = new ServiceController(serviceName);
-
-            if(serviceController.Status != ServiceControllerStatus.Running) // проверяем не запущенна ли служба
-            {
-                serviceController.Start(); // запускаем службу
-                serviceController.WaitForStatus(ServiceControllerStatus.Running, TimeSpan.FromMinutes(1)); // в течении минуты ждём статус от службы
-                return "Служба запущена";
-            }
-            else // если служба уже запущена
-            {
-                return "Служба уже запущена";
-            }
-        }
-
-        private string StopService(string serviceName) // запуск службы
-        {
-            ServiceController serviceController = new ServiceController(serviceName);
-
-            if (serviceController.Status != ServiceControllerStatus.Stopped) // проверяем не остановлена ли служба
-            {
-                serviceController.Stop(); // останавливаем службу
-                serviceController.WaitForStatus(ServiceControllerStatus.Stopped, TimeSpan.FromMinutes(1)); // в течении минуты ждём статус от службы
-                return "Служба остановлена";
-            }
-            else // если служба уже остановлена
-            {
-                return "Служба уже остановлена";
             }
         }
     }
