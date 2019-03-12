@@ -32,7 +32,7 @@ namespace Client
                     scServices = ServiceController.GetServices();// получаем список всех служб
 
                     // получаем ответ
-                    data = new byte[64]; // буфер для получаемых данных
+                    data = new byte[128]; // буфер для получаемых данных
                     StringBuilder stringBuilder = new StringBuilder();
                     int bytes = 0;
 

@@ -33,6 +33,8 @@ namespace Server
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                Console.WriteLine("Нажмите любую клавишу для продолжения");
+                Console.ReadKey();
             }
             finally
             {

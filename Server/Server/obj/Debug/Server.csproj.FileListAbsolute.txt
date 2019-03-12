@@ -12,3 +12,10 @@ D:\Tasks\-C-\Server\Server\obj\Debug\Server.csprojAssemblyReference.cache
 D:\Tasks\-C-\Server\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
 D:\Tasks\-C-\Server\Server\obj\Debug\Server.exe
 D:\Tasks\-C-\Server\Server\obj\Debug\Server.pdb
+D:\Git\-C-\Server\Server\bin\Debug\Server.exe.config
+D:\Git\-C-\Server\Server\bin\Debug\Server.exe
+D:\Git\-C-\Server\Server\bin\Debug\Server.pdb
+D:\Git\-C-\Server\Server\obj\Debug\Server.csprojAssemblyReference.cache
+D:\Git\-C-\Server\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
+D:\Git\-C-\Server\Server\obj\Debug\Server.exe
+D:\Git\-C-\Server\Server\obj\Debug\Server.pdb
