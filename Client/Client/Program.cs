@@ -140,15 +140,13 @@ namespace Client
             {
                 servicesName[i] = scServices[i].DisplayName;
                 s += String.Format("{0} : {1} статус службы : {2} \n", i, servicesName[i], scServices[i].Status);
-
             }
             return s;
         }
 
-        private static string StatusService(string serviceName) // выводим ифнормацию о статусе каждой службы
+        private static string StatusService(string serviceName) // выводим ифнормацию о конкретной каждой службы
         {
             ServiceController serviceController = new ServiceController(serviceName);
-
             return String.Format("{0} статус службы : {1} \n", serviceName, serviceController.Status);
         }
     }

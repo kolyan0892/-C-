@@ -11,34 +11,50 @@ namespace Word
     {
         static void Main(string[] args)
         {
-            StreamReader streamReader = new StreamReader("INPUT.txt",Encoding.Default); // создаем поток
-
-            string s = streamReader.ReadToEnd(); // считываем текст в строку
-            s = s.ToUpper(); // меняем все на верхний регистр
-            string[] sS = s.Split(' ', '\n', '\r', ',', '.', '?', '!'); // разбиваем строку на слова 
-            string[] ssDistinct = sS.Distinct().ToArray(); // получаем строку с уникальными (не повторяющимися) словами
-
-            WordStorage[] wordsStorage = new WordStorage[ssDistinct.Length]; // массив объектов для хранения слова и его повторов
-
-            for(int i = 0; i < ssDistinct.Length; i++)
+            StreamReader streamReader = null;
+            try
             {
-                wordsStorage[i] = new WordStorage(ssDistinct[i]); // создаем объект слово
+                streamReader = new StreamReader("INPUT.txt", Encoding.Default); // создаем поток
 
-                for(int j = 0; j < sS.Length; j++)
+                string s = streamReader.ReadToEnd(); // считываем текст в строку
+                s = s.ToUpper(); // меняем все на верхний регистр
+                string[] sS = s.Split(' ', '\n', '\r', ',', '.', '?', '!'); // разбиваем строку на слова 
+                string[] ssDistinct = sS.Distinct().ToArray(); // получаем строку с уникальными (не повторяющимися) словами
+
+                WordStorage[] wordsStorage = new WordStorage[ssDistinct.Length]; // массив объектов для хранения слова и его повторов
+
+                for (int i = 0; i < ssDistinct.Length; i++)
                 {
-                    if(ssDistinct[i] == sS[j]) // если уникальное слово встречается в тексте, то увеличиваем счетчик
+                    wordsStorage[i] = new WordStorage(ssDistinct[i]); // создаем объект слово
+
+                    for (int j = 0; j < sS.Length; j++)
                     {
-                        wordsStorage[i].Count++;
+                        if (ssDistinct[i] == sS[j]) // если уникальное слово встречается в тексте, то увеличиваем счетчик
+                        {
+                            wordsStorage[i].Count++;
+                        }
                     }
                 }
+
+                foreach (WordStorage mW in Max(wordsStorage)) // выводим список частых слов
+                {
+                    Console.WriteLine("Частое слово: {0}", mW.Word);
+                    Console.WriteLine("Количество повторов: {0}", mW.Count);
+                }
             }
-           
-            foreach(WordStorage mW in Max(wordsStorage)) // выводим список частых слов
+            catch (Exception ex)
             {
-                Console.WriteLine("Частое слово: {0}", mW.Word);
-                Console.WriteLine("Количество повторов: {0}", mW.Count);
+                Console.WriteLine(ex.Message);
             }
-            Console.ReadKey();
+            finally
+            {
+                if (streamReader != null)
+                    streamReader.Close();
+
+                Console.WriteLine("Нажмите любую клавишу для завершения программы");
+                Console.ReadKey();
+            }
+            
         }
 
         static List<WordStorage> Max(WordStorage[] wordsStorage)

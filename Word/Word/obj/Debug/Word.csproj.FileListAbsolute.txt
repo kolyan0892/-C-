@@ -11,3 +11,9 @@ D:\Tasks\-C-\Word\Word\bin\Debug\Word.pdb
 D:\Tasks\-C-\Word\Word\obj\Debug\Word.csproj.CoreCompileInputs.cache
 D:\Tasks\-C-\Word\Word\obj\Debug\Word.exe
 D:\Tasks\-C-\Word\Word\obj\Debug\Word.pdb
+D:\Git\-C-\Word\Word\bin\Debug\Word.exe.config
+D:\Git\-C-\Word\Word\bin\Debug\Word.exe
+D:\Git\-C-\Word\Word\bin\Debug\Word.pdb
+D:\Git\-C-\Word\Word\obj\Debug\Word.csproj.CoreCompileInputs.cache
+D:\Git\-C-\Word\Word\obj\Debug\Word.exe
+D:\Git\-C-\Word\Word\obj\Debug\Word.pdb

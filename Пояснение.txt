@@ -1,0 +1,4 @@
+Задание №1 - Milky Way, входные и выходные данные находятся в Milky Way\Milky Way\bin\Debug
+Задание №2 - Drawing
+Задание №3 - Word, входные данные назходятся в Word\Word\bin\Debug
+Задание №4 - Server, Client. Сначала необходимо запустить программу Server, затем программу Client

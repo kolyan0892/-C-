@@ -5,3 +5,10 @@ C:\Users\User\source\repos\Milky Way\Milky Way\obj\Debug\Milky Way.csprojAssembl
 C:\Users\User\source\repos\Milky Way\Milky Way\obj\Debug\Milky Way.csproj.CoreCompileInputs.cache
 C:\Users\User\source\repos\Milky Way\Milky Way\obj\Debug\Milky Way.exe
 C:\Users\User\source\repos\Milky Way\Milky Way\obj\Debug\Milky Way.pdb
+D:\Git\-C-\Milky Way\Milky Way\bin\Debug\Milky Way.exe.config
+D:\Git\-C-\Milky Way\Milky Way\bin\Debug\Milky Way.exe
+D:\Git\-C-\Milky Way\Milky Way\bin\Debug\Milky Way.pdb
+D:\Git\-C-\Milky Way\Milky Way\obj\Debug\Milky Way.csprojAssemblyReference.cache
+D:\Git\-C-\Milky Way\Milky Way\obj\Debug\Milky Way.csproj.CoreCompileInputs.cache
+D:\Git\-C-\Milky Way\Milky Way\obj\Debug\Milky Way.exe
+D:\Git\-C-\Milky Way\Milky Way\obj\Debug\Milky Way.pdb

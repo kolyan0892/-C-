@@ -15,31 +15,48 @@ namespace Milky_Way
             int number; // число в таблице
             int sum = 0; // сумма соединений городов
             string[] sS;
-            StreamReader fileIn = new StreamReader("INPUT.txt");
-            StreamWriter fileOut = new StreamWriter("OUTPUT.txt", false);
+            StreamReader fileIn = null;
+            StreamWriter fileOut = null;
 
-            string s = fileIn.ReadLine(); // считываем количество строк и столбцов
-            n = Int32.Parse(s);           
-
-            for (int i = 0; i < n; i++)
+            try
             {
-                s = fileIn.ReadLine(); // берем строку
-                sS = s.Split(' '); // разбиваем строку на цифры
-                for (int j = 0; j < n; j++)
+                fileIn = new StreamReader("INPUT.txt");
+                fileOut = new StreamWriter("OUTPUT.txt", false);
+
+                string s = fileIn.ReadLine(); // считываем количество строк и столбцов
+                n = Int32.Parse(s);
+
+                for (int i = 0; i < n; i++)
                 {
-                    number = Int32.Parse(sS[j]);
-                    if (number > 0)
+                    s = fileIn.ReadLine(); // берем строку
+                    sS = s.Split(' '); // разбиваем строку на цифры
+                    for (int j = 0; j < n; j++)
                     {
-                        sum += 1;
+                        number = Int32.Parse(sS[j]);
+                        if (number > 0)
+                        {
+                            sum += 1;
+                        }
                     }
                 }
+
+                fileOut.WriteLine(sum / 2); // записываем половину суммы. Количество дорог из города и в город равно 1 
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                if(fileIn != null)
+                    fileIn.Close();
 
-            fileOut.WriteLine(sum/2); // записываем половину суммы. Количество дорог из города и в город равно 1 
+                if(fileOut != null)
+                    fileOut.Close();
 
-            fileIn.Close();
-            fileOut.Close();
-            Console.ReadKey();
+                Console.WriteLine("Нажмите любую клавишу для завершения программы");
+                Console.ReadKey();
+            }            
         }
     }
 }
